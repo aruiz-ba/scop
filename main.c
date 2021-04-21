@@ -29,8 +29,8 @@ int main(int argc, char **argv)
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-//	float	vertex_buffer[12][3];
-	scale(vertex_buffer, 0.5f);
+	//float	vertex_buffer[12][3];
+	//scale(vertex_buffer, 0.5f);
 	static const GLfloat g_vertex_buffer_data[] = {
 		-1.0f,-1.0f,-1.0f, // triangle 1 : begin
 		-1.0f,-1.0f, 1.0f,
