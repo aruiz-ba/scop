@@ -9,16 +9,19 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 	//read Vertex shader
 	const char *vertexShaderSource = "#version 330 core\n"
     		"layout (location = 0) in vec3 aPos;\n\n"
+    		"layout(location = 1) in vec3 vertexColor;\n\n"
+    		"out vec3 fragmentColor;\n\n"
     		"void main()\n"
     		"{\n"
     		"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    		"}\0";
+    		"   fragmentColor = vertexColor;\n" "}\0";
 	//read fragment shader
 	const char *fragmentShaderSource = "#version 330 core\n"
-		"out vec3 FragColor;\n"
+		"in vec3 fragmentColor;\n"
+		"out vec3 color;\n"
 		"void main()\n"
 		"{\n"
-	   	"	FragColor = vec3(1, 0, 0);\n"
+	   	"	color = fragmentColor;\n"
 		"}\n\0";
 
 	//Compile Vertex Shader
@@ -29,11 +32,13 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 	//Check Vertex Shader
 	int  success;
 	char infoLog[512];
+	int InfoLogLength;
 	glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, &success);
-	if(!success)
+	glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
+	if( InfoLogLength > 0 )
 	{
-	    glGetShaderInfoLog(VertexShaderID, 512, NULL, infoLog);
-	    printf("Error in shader compilation: %s\n", infoLog);
+		glGetShaderInfoLog(VertexShaderID, 512, NULL, infoLog);
+		printf("Error in shader compilation: %s\n", infoLog);
 	}
 
 	//Compile Fragment Shader

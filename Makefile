@@ -2,17 +2,18 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-OBJ = scop
+GLFLAGS = -lGL -lglut -lGLEW
+OBJFILES = main.o window.o loadShader.o transformation.o
+TARGET = scop
 
-all:
-	$(CC) main.c window.c loadShader.c -lGL -lglut -lGLEW -o $(OBJ)
+all: $(TARGET)
+
+$(TARGET): $(OBJFILES)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(GLFLAGS)
 test:
-	$(CC) -g main.c window.c loadShader.c -lGL -lglut -lGLEW -o $(OBJ)
+	$(CC) -g main.c window.c loadShader.c transformation.c -lGL -lglut -lGLEW -o $(OBJ)
 	gdb $(OBJ)
-lol:
-	$(CC) main.c window.c loadShader.c -lGL -lglut -lGLEW -o $(OBJ)
-	./$(OBJ)
 exec:
 	./$(OBJ)
 clean:
-	rm $(OBJ)
+	rm -f $(OBJFILES) $(TARGET)
