@@ -18,57 +18,69 @@ void display()
 
 int main(int argc, char **argv)
 {
-	// Create and compile our GLSL program from the shaders
+	//Create and compile our GLSL program from the shaders
 	glutInit(&argc, argv);
 	init_glut();
 	init_glew();
 	GLuint programID = LoadShaders( "VertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
+
+	// Enable depth test
+	glEnable(GL_DEPTH_TEST);
+	// Accept fragment if it closer to the camera than the former one
+	glDepthFunc(GL_LESS); 
 
 	//Create VAO or Vertex Array Object
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-	//float	vertex_buffer[12][3];
-	//scale(vertex_buffer, 0.5f);
-	static const GLfloat g_vertex_buffer_data[] = {
-		-1.0f,-1.0f,-1.0f, // triangle 1 : begin
-		-1.0f,-1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f, // triangle 1 : end
-		1.0f, 1.0f,-1.0f, // triangle 2 : begin
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f,-1.0f, // triangle 2 : end
-		1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		-1.0f,-1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f,-1.0f,
-		-1.0f, 1.0f,-1.0f,
-		1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f
+	float	vertex_buffer[36][3] = {
+		{-1.0f,-1.0f,-1.0f}, // triangle 1 : begin}
+		{-1.0f,-1.0f, 1.0f},
+		{-1.0f, 1.0f, 1.0f}, // triangle 1 : end
+		{1.0f, 1.0f,-1.0f}, // triangle 2 : begin
+		{-1.0f,-1.0f,-1.0f},
+		{-1.0f, 1.0f,-1.0f}, // triangle 2 : end
+		{1.0f,-1.0f, 1.0f},
+		{-1.0f,-1.0f,-1.0f},
+		{1.0f,-1.0f,-1.0f},
+		{1.0f, 1.0f,-1.0f},
+		{1.0f,-1.0f,-1.0f},
+		{-1.0f,-1.0f,-1.0f},
+		{-1.0f,-1.0f,-1.0f},
+		{-1.0f, 1.0f, 1.0f},
+		{-1.0f, 1.0f,-1.0f},
+		{1.0f,-1.0f, 1.0f},
+		{-1.0f,-1.0f, 1.0f},
+		{-1.0f,-1.0f,-1.0f},
+		{-1.0f, 1.0f, 1.0f},
+		{-1.0f,-1.0f, 1.0f},
+		{1.0f,-1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f},
+		{1.0f,-1.0f,-1.0f},
+		{1.0f, 1.0f,-1.0f},
+		{1.0f,-1.0f,-1.0f},
+		{1.0f, 1.0f, 1.0f},
+		{1.0f,-1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f},
+		{1.0f, 1.0f,-1.0f},
+		{-1.0f, 1.0f,-1.0f},
+		{1.0f, 1.0f, 1.0f},
+		{-1.0f, 1.0f,-1.0f},
+		{-1.0f, 1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f},
+		{-1.0f, 1.0f, 1.0f},
+		{1.0f,-1.0f, 1.0f}
 	};
+	scale(vertex_buffer, 0.5f);
+	printf("tras escalar: %f\n" , vertex_buffer[0][0]);
+	//rotation_x(vertex_buffer, 0.2f);
+	//printf("transformao en x: %f\n" , vertex_buffer[0][0]);
+	rotation_y(vertex_buffer, 10);
+	//printf("transformao en y: %f\n" , vertex_buffer[0][0]);
+	//printf("Does It change?: %f\n", vertex_buffer[0][2]);
+	//printf("Does It change?: %f\n", vertex_buffer[0][2]);
+	//static const GLfloat g_vertex_buffer_data[36][3];
 	static const GLfloat g_color_buffer_data[] = {
 	    0.583f,  0.771f,  0.014f,
 	    0.609f,  0.115f,  0.436f,
@@ -117,7 +129,8 @@ int main(int argc, char **argv)
 	// The following commands will talk about our 'vertexbuffer' buffer
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	// Give our vertices to OpenGL.
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);	
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);	
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer), vertex_buffer, GL_STATIC_DRAW);	
 
 
 	glEnableVertexAttribArray(0);

@@ -1,7 +1,7 @@
 #Makefile for scop
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc -g
+CFLAGS = -Wall -Wextra -Werror -lm
 GLFLAGS = -lGL -lglut -lGLEW
 OBJFILES = main.o window.o loadShader.o transformation.o
 TARGET = scop
