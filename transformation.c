@@ -5,8 +5,9 @@ void rotation_y(float input[36][3], float angle)
 {
 	int i;
 	int y;
-	float anglex = 10;
+	float anglex = 1;
 	float angley = angle;
+	angley = 3;
 	float anglez = 0;
 
 	float rotate_x[4][4] = {
