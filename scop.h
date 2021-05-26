@@ -11,3 +11,4 @@ void	scale(float input[36][3], float scale);
 void	rotation_x(float input[36][3], float angle);
 void	rotation_y(float input[36][3], float angle);
 void	set_draw();
+GLuint loadBMP_custom(const char * imagepath);

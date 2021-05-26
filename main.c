@@ -41,5 +41,6 @@ int main(int argc, char **argv)
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
+	loadBMP_custom("./textures/texture.bmp");
 	glutMainLoop();
 }
