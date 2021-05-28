@@ -57,12 +57,5 @@ GLuint loadBMP_custom(const char * imagepath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-
-
-	printf("dataPos %i\n", dataPos);
-	printf("imageSize %i\n", imageSize);
-	printf("width %i\n", width);
-	printf("height %i\n", height);
-
 	return(0);
 }

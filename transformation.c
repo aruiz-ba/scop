@@ -1,12 +1,12 @@
 #include "scop.h"
 #include <math.h>
 
-void rotation_y(float input[36][3], float angle)
+void rotation_y(float input[36][3], t_key *key)
 {
 	int i;
 	int y;
-	float anglex = 1.0f;
-	float angley = angle;
+	float anglex = key->rot_x;
+	float angley = key->rot_y;
 	//angley = 34;
 	float anglez = 0.0f;
 
@@ -78,9 +78,6 @@ void scale(float input[36][3], float scale)
 	y = 0;
 	while (y < 36)
 	{
-		//out[y][0] = input[y][0] * scale;
-		//out[y][1] = input[y][1] * scale;
-		//out[y][2] = input[y][2] * scale;
 		input[y][0] *= scale;
 		input[y][1] *= scale;
 		input[y][2] *= scale;

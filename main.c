@@ -9,17 +9,17 @@ void init_glew()
 	  exit(1); // or handle the error in a nicer way
 }
 
-int keyStates[256];
-float rot;
+int	keyStates[256];
+t_key	key;
 
 void display()
 {
-	printf("FUNCIONAPLIS %i\n",keyStates[119]);
+	key_to_transform(&key, keyStates);	
 	if (keyStates[119] == 1)
-		rot += 0.1f;
-
+		key.rot_x += 0.1f;
+	printf("test %f\n", key.rot_x);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	set_draw(rot);
+	set_draw(&key);
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
 	// Accept fragment if it closer to the camera than the former one
@@ -64,7 +64,9 @@ void key_up (unsigned char key, int x, int y)
 int main(int argc, char **argv)
 {
 	//Create and compile our GLSL program from the shaders
-	rot = 10.0f;
+	key.rot_x = 0.0f;
+	key.rot_y = 0.0f;
+	key.zoom = 0.5f;
 	glutInit(&argc, argv);
 	init_glut();
 	init_glew();
@@ -74,7 +76,8 @@ int main(int argc, char **argv)
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
-	loadBMP_custom("./textures/texture.bmp");
+	//loadBMP_custom("./textures/texture.bmp");
+	loadBMP_custom("./textures/dirt.bmp");
 	// When MAGnifying the image (no bigger mipmap available), use LINEAR filtering
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too

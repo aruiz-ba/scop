@@ -1,6 +1,6 @@
 #include "scop.h"
 
-void	set_draw(float rot)
+void	set_draw(t_key *key)
 {
 	//Create VAO or Vertex Array Object
 	GLuint programID = LoadShaders( "VertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
@@ -47,10 +47,9 @@ void	set_draw(float rot)
 		{1.0f,-1.0f, 1.0f}
 	};
 
-	scale(vertex_buffer, 0.5f);
-	printf("tras escalar: %f\n" , vertex_buffer[0][0]);
+	scale(vertex_buffer, key->zoom);
 	//rotation_x(vertex_buffer, 0.10f);
-	rotation_y(vertex_buffer, rot);
+	rotation_y(vertex_buffer, key);
 	// Two UV coordinatesfor each vertex. They were created with Blender. You'll learn shortly how to do this yourself.
 	static const GLfloat g_uv_buffer_data[] = {
 	    0.000059f, 1.0f-0.000004f,
