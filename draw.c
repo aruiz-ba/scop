@@ -8,45 +8,68 @@ void	set_draw(t_key *key)
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-	float	vertex_buffer[36][3] = {
-		{-1.0f,-1.0f,-1.0f}, // triangle 1 : begin}
-		{-1.0f,-1.0f, 1.0f},
-		{-1.0f, 1.0f, 1.0f}, // triangle 1 : end
-		{1.0f, 1.0f,-1.0f}, // triangle 2 : begin
-		{-1.0f,-1.0f,-1.0f},
-		{-1.0f, 1.0f,-1.0f}, // triangle 2 : end
-		{1.0f,-1.0f, 1.0f},
-		{-1.0f,-1.0f,-1.0f},
-		{1.0f,-1.0f,-1.0f},
-		{1.0f, 1.0f,-1.0f},
-		{1.0f,-1.0f,-1.0f},
-		{-1.0f,-1.0f,-1.0f},
-		{-1.0f,-1.0f,-1.0f},
-		{-1.0f, 1.0f, 1.0f},
-		{-1.0f, 1.0f,-1.0f},
-		{1.0f,-1.0f, 1.0f},
-		{-1.0f,-1.0f, 1.0f},
-		{-1.0f,-1.0f,-1.0f},
-		{-1.0f, 1.0f, 1.0f},
-		{-1.0f,-1.0f, 1.0f},
-		{1.0f,-1.0f, 1.0f},
-		{1.0f, 1.0f, 1.0f},
-		{1.0f,-1.0f,-1.0f},
-		{1.0f, 1.0f,-1.0f},
-		{1.0f,-1.0f,-1.0f},
-		{1.0f, 1.0f, 1.0f},
-		{1.0f,-1.0f, 1.0f},
-		{1.0f, 1.0f, 1.0f},
-		{1.0f, 1.0f,-1.0f},
-		{-1.0f, 1.0f,-1.0f},
-		{1.0f, 1.0f, 1.0f},
-		{-1.0f, 1.0f,-1.0f},
-		{-1.0f, 1.0f, 1.0f},
-		{1.0f, 1.0f, 1.0f},
-		{-1.0f, 1.0f, 1.0f},
-		{1.0f,-1.0f, 1.0f}
+//	float	vertex_buffer[36][3] = {
+//		{-1.0f,-1.0f,-1.0f}, // triangle 1 : begin}
+//		{-1.0f,-1.0f, 1.0f},
+//		{-1.0f, 1.0f, 1.0f}, // triangle 1 : end
+//		{1.0f, 1.0f,-1.0f}, // triangle 2 : begin
+//		{-1.0f,-1.0f,-1.0f},
+//		{-1.0f, 1.0f,-1.0f}, // triangle 2 : end
+//		{1.0f,-1.0f, 1.0f},
+//		{-1.0f,-1.0f,-1.0f},
+//		{1.0f,-1.0f,-1.0f},
+//		{1.0f, 1.0f,-1.0f},
+//		{1.0f,-1.0f,-1.0f},
+//		{-1.0f,-1.0f,-1.0f},
+//		{-1.0f,-1.0f,-1.0f},
+//		{-1.0f, 1.0f, 1.0f},
+//		{-1.0f, 1.0f,-1.0f},
+//		{1.0f,-1.0f, 1.0f},
+//		{-1.0f,-1.0f, 1.0f},
+//		{-1.0f,-1.0f,-1.0f},
+//		{-1.0f, 1.0f, 1.0f},
+//		{-1.0f,-1.0f, 1.0f},
+//		{1.0f,-1.0f, 1.0f},
+//		{1.0f, 1.0f, 1.0f},
+//		{1.0f,-1.0f,-1.0f},
+//		{1.0f, 1.0f,-1.0f},
+//		{1.0f,-1.0f,-1.0f},
+//		{1.0f, 1.0f, 1.0f},
+//		{1.0f,-1.0f, 1.0f},
+//		{1.0f, 1.0f, 1.0f},
+//		{1.0f, 1.0f,-1.0f},
+//		{-1.0f, 1.0f,-1.0f},
+//		{1.0f, 1.0f, 1.0f},
+//		{-1.0f, 1.0f,-1.0f},
+//		{-1.0f, 1.0f, 1.0f},
+//		{1.0f, 1.0f, 1.0f},
+//		{-1.0f, 1.0f, 1.0f},
+//		{1.0f,-1.0f, 1.0f}
+//	};
+	//float	vertex_buffer[42][3] = {
+	float	output[42][3] = {
+		{0.0f,0.0f,0.0f}, //1
+		{0.0f,0.0f,1.0f}, //2
+		{0.0f,1.0f,0.0f}, //3
+		{0.0f,1.0f,1.0f}, //4
+		{1.0f,0.0f,0.0f}, //5
+		{1.0f,1.0f,0.0f}, //6
+		{1.0f,0.0f,1.0f}, //7
+		{1.0f,1.0f,0.0f}, //8
+		{1.0f,1.0f,1.0f} //9
 	};
-
+	int faces[6][4] = {
+		{1,2,3,4},
+		{9,7,8,5},
+		{1,2,5,7},
+		{1,3,5,8},
+		{6,3,9,4},
+		{2,4,7,9}
+	};
+	//float output[200][3];
+	//print(vertex_buffer, faces, output);
+	float vertex_buffer[200][3];
+	print(output, faces, vertex_buffer);
 	scale(vertex_buffer, key->zoom);
 	//rotation_x(vertex_buffer, 0.10f);
 	rotation_y(vertex_buffer, key);
@@ -172,6 +195,7 @@ void	set_draw(t_key *key)
 	glUseProgram(programID);
 
 	//Draw the triangle
-	glDrawArrays(GL_TRIANGLES, 0, 12*3);
+	//glDrawArrays(GL_TRIANGLES, 0, 42);
+	glDrawArrays(GL_TRIANGLES, 0, 42);
 	glFlush();
 }

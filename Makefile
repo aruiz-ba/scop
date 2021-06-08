@@ -3,7 +3,7 @@
 CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror -lm
 GLFLAGS = -lGL -lglut -lGLEW
-OBJFILES = main.o window.o loadShader.o transformation.o draw.o load_textures.o events.o
+OBJFILES = main.o window.o loadShader.o transformation.o draw.o load_textures.o events.o parser.o
 TARGET = scop
 
 all: $(TARGET)
