@@ -17,7 +17,7 @@ void display()
 	key_to_transform(&key, keyStates);	
 	if (keyStates[119] == 1)
 		key.rot_x += 0.1f;
-	printf("test %f\n", key.rot_x);
+	//printf("test %f\n", key.rot_x);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	set_draw(&key);
 	// Enable depth test
@@ -31,31 +31,31 @@ void key_down(unsigned char key, int x, int y)
 	if (key == 033)
 		exit(0);
 
-	if (key == 119)
-		printf("w is pressed\n");
-	if (key == 97)
-		printf("a is pressed\n");
-	if (key == 100)
-		printf("d is pressed\n");
-	if (key == 115)
-		printf("s is pressed\n");
+//	if (key == 119)
+//		printf("w is pressed\n");
+//	if (key == 97)
+//		printf("a is pressed\n");
+//	if (key == 100)
+//		printf("d is pressed\n");
+//	if (key == 115)
+//		printf("s is pressed\n");
 		
 	keyStates[key] = 1;
-	printf("Keypress:%i\n", key);
+//	printf("Keypress:%i\n", key);
 	printf("coords:%i, %i\n", x, y);
 	glutPostRedisplay();
 }
 
 void key_up (unsigned char key, int x, int y)
 {  
-	if (key == 119)
-		printf("w is up\n");
-	if (key == 97)
-		printf("a is up\n");
-	if (key == 100)
-		printf("d is up\n");
-	if (key == 115)
-			printf("s is up\n");
+//	if (key == 119)
+//		printf("w is up\n");
+//	if (key == 97)
+//		printf("a is up\n");
+//	if (key == 100)
+//		printf("d is up\n");
+//	if (key == 115)
+//			printf("s is up\n");
 	keyStates[key] = 0;
 	printf("coords:%i, %i\n", x, y);
 	glutPostRedisplay();
@@ -63,6 +63,8 @@ void key_up (unsigned char key, int x, int y)
 
 int main(int argc, char **argv)
 {
+	//t_obj obj;
+
 	//Create and compile our GLSL program from the shaders
 	key.rot_x = 0.0f;
 	key.rot_y = 0.0f;
@@ -76,6 +78,11 @@ int main(int argc, char **argv)
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
+	//parse texture
+	//parse_texture(argv[1]);
+
+	//parse_obj(argv[1], &obj);
+
 	//loadBMP_custom("./textures/texture.bmp");
 	loadBMP_custom("./textures/dirt.bmp");
 	// When MAGnifying the image (no bigger mipmap available), use LINEAR filtering

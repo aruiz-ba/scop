@@ -1,7 +1,7 @@
 #include "scop.h"
 #include <math.h>
 
-void rotation_y(float input[42][3], t_key *key)
+void rotation_y(float input[278][3], t_key *key)
 {
 	int i;
 	int y;
@@ -18,7 +18,7 @@ void rotation_y(float input[42][3], t_key *key)
 
 	i = 0;
 	y = 0;
-	while (y < 42)
+	while (y < 278)
 	{
 		//input[y][0] =  input[y][0];
 		//input[y][1] =  (cos(angle) * input[y][1]) - (sin(angle) * input[y][2]);
@@ -36,7 +36,7 @@ void rotation_y(float input[42][3], t_key *key)
 	}
 }
 
-void rotation_x(float input[42][3], float angle)
+void rotation_x(float input[278][3], float angle)
 {
 //	int i;
 	int y;
@@ -50,7 +50,7 @@ void rotation_x(float input[42][3], float angle)
 //	i = 0;
 	y = 0;
 	printf("Print of sen %f\n", sin(0.2f));
-	while (y < 42)
+	while (y < 278)
 	{
 		input[y][0] =  (cos(angle) * input[y][0]) - (sin(angle) * input[y][1]);
 		input[y][1] =  (sin(angle) * input[y][0]) + (cos(angle) * input[y][1]);
@@ -71,12 +71,12 @@ void rotation_x(float input[42][3], float angle)
 	}
 }
 
-void scale(float input[42][3], float scale)
+void scale(float input[278][3], float scale)
 {
 	int	y;
 
 	y = 0;
-	while (y < 42)
+	while (y < 278)
 	{
 		input[y][0] *= scale;
 		input[y][1] *= scale;
