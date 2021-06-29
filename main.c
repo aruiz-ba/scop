@@ -11,6 +11,7 @@ void init_glew()
 
 int	keyStates[256];
 t_key	key;
+t_obj	obj;
 
 void display()
 {
@@ -19,7 +20,7 @@ void display()
 		key.rot_x += 0.1f;
 	//printf("test %f\n", key.rot_x);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	set_draw(&key);
+	set_draw(&key, &obj);
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
 	// Accept fragment if it closer to the camera than the former one
@@ -63,7 +64,6 @@ void key_up (unsigned char key, int x, int y)
 
 int main(int argc, char **argv)
 {
-	//t_obj obj;
 
 	//Create and compile our GLSL program from the shaders
 	key.rot_x = 0.0f;
@@ -81,7 +81,9 @@ int main(int argc, char **argv)
 	//parse texture
 	//parse_texture(argv[1]);
 
-	//parse_obj(argv[1], &obj);
+	parse_obj_v(argv[1], &obj);
+	parse_obj_f(argv[1], &obj);
+	printf("Number of triangles: %i\n", obj.t_n);
 
 	//loadBMP_custom("./textures/texture.bmp");
 	loadBMP_custom("./textures/dirt.bmp");

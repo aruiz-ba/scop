@@ -1,7 +1,7 @@
 #include "scop.h"
 #include <math.h>
 
-void rotation_y(float input[278][3], t_key *key)
+void rotation_y(t_obj *obj, t_key *key)
 {
 	int i;
 	int y;
@@ -9,6 +9,7 @@ void rotation_y(float input[278][3], t_key *key)
 	float angley = key->rot_y;
 	//angley = 34;
 	float anglez = 0.0f;
+	int	total_vertices;
 
 	float rotate_x[4][4] = {
 		{cos(anglez) * cos(angley), (cos(anglez) * sin(angley) * sin(anglex)) - (sin(anglez) * cos(anglex)), (cos(anglez) * sin(angley) *cos(anglex)) + (sin(anglez) * sin(anglex))},
@@ -18,7 +19,8 @@ void rotation_y(float input[278][3], t_key *key)
 
 	i = 0;
 	y = 0;
-	while (y < 278)
+	total_vertices = obj->t_n * 3;
+	while (y < total_vertices)
 	{
 		//input[y][0] =  input[y][0];
 		//input[y][1] =  (cos(angle) * input[y][1]) - (sin(angle) * input[y][2]);
@@ -26,9 +28,9 @@ void rotation_y(float input[278][3], t_key *key)
 
 		while (i < 3)
 		{
-			input[y][i] = ((rotate_x[i][0] * input[y][0]) 
-				+ (rotate_x[i][1] * input[y][1])
-				+ (rotate_x[i][2] * input[y][2]));
+			obj->t_v[y][i] = ((rotate_x[i][0] * obj->t_v[y][0]) 
+				+ (rotate_x[i][1] * obj->t_v[y][1])
+				+ (rotate_x[i][2] * obj->t_v[y][2]));
 			i++;
 		}
 		i = 0;
@@ -71,16 +73,18 @@ void rotation_x(float input[278][3], float angle)
 	}
 }
 
-void scale(float input[278][3], float scale)
+void scale(t_obj *obj, float scale)
 {
 	int	y;
+	int	total_vertices;
 
 	y = 0;
-	while (y < 278)
+	total_vertices = obj->t_n * 3;
+	while (y < total_vertices)
 	{
-		input[y][0] *= scale;
-		input[y][1] *= scale;
-		input[y][2] *= scale;
+		obj->t_v[y][0] *= scale;
+		obj->t_v[y][1] *= scale;
+		obj->t_v[y][2] *= scale;
 		y++;	
 	}
 }
